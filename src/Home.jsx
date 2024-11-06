@@ -1,10 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import api from "./axiosApi";
 import LoginForm from "./LoginForm";
 import Loading from './Loading';
 import handleChange from './handleChange';
-import parseErrors from './parseErrors';
 import { login } from './authService';
 
 const Home = () => {

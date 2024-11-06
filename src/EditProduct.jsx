@@ -10,7 +10,6 @@ import Loading from './Loading';
 const EditProduct = () => {
     const [inputs, setInputs] = useState({});
     const [errors, setErrors] = useState({});
-    const [modal, setModal] = useState(undefined);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
