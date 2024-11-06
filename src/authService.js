@@ -1,5 +1,5 @@
 import api from "./axiosApi";
-import * as jwt from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 export const login = async (email, senha) => {
     let loggedIn = false;
@@ -32,7 +32,7 @@ export const getToken = () => {
 export const isAdmin = () => {
     const token = getToken();
     if (token) {
-        const decoded = jwt(token);
+        const decoded = jwtDecode(token);
         return (decoded.perfil === 0);
     } else {
         return false;
