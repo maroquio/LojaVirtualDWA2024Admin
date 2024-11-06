@@ -12,8 +12,9 @@ const OrderDetails = () => {
 
     useEffect(() => {
         setLoading(true);
-        api.get(`obter_pedido/${orderId}`)
-            .then(response => {         
+        const orderDetailsEndpoint = `admin/obter_pedido/${orderId}`;
+        api.get(orderDetailsEndpoint)
+            .then(response => {
                 if (response.status === 200) {
                     setOrder(response.data);
                 } else {
@@ -21,7 +22,7 @@ const OrderDetails = () => {
                 }
             })
             .catch(error => {
-                //console.error('Erro ao carregar pedido:', error);
+                console.error('Erro ao carregar pedido:', error);
                 navigate("/orders")
             })
             .finally(() => {

@@ -13,7 +13,7 @@ const Orders = () => {
 
     const loadOrders = (state) => {
         setLoading(true);
-        const ordersEndpoint = `obter_pedidos_por_estado/${state}`;
+        const ordersEndpoint = `admin/obter_pedidos_por_estado/${state}`;
         api.get(ordersEndpoint)
             .then((response) => {
                 setOrders(response.data);
@@ -28,7 +28,7 @@ const Orders = () => {
 
     const cancelOrder = (orderId) => {
         setLoading(true);
-        api.postForm("cancelar_pedido", {"id_pedido": orderId})
+        api.postForm("cancelar_pedido", { "id_pedido": orderId })
             .then(response => {
                 if (response.status === 204)
                     loadOrders(orderState);
@@ -43,7 +43,7 @@ const Orders = () => {
 
     const evolveOrder = (orderId) => {
         setLoading(true);
-        api.postForm("evoluir_pedido", {"id_pedido": orderId})
+        api.postForm("evoluir_pedido", { "id_pedido": orderId })
             .then(response => {
                 if (response.status === 204)
                     loadOrders(orderState);

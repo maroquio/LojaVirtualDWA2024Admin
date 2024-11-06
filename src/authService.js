@@ -3,7 +3,8 @@ import { jwtDecode } from "jwt-decode";
 
 export const login = async (email, senha) => {
     let loggedIn = false;
-    await api.post("auth/entrar", { "email": email, "senha": senha })
+    const loginEndpoint = "auth/entrar";
+    await api.post(loginEndpoint, { "email": email, "senha": senha })
         .then((response) => {
             if (response.status === 200) {
                 if (response.data.token) {                    

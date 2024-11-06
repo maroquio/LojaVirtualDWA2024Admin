@@ -12,7 +12,7 @@ const Products = () => {
 
     const loadProducts = () => {
         setLoading(true);
-        const productsEndpoint = "obter_produtos";
+        const productsEndpoint = "admin/obter_produtos";
         api.get(productsEndpoint)
             .then((response) => {
                 setProducts(response.data);

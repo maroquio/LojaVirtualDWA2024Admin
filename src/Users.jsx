@@ -12,7 +12,7 @@ const Users = () => {
 
     const loadUsers = () => {
         setLoading(true);
-        const usersEndpoint = "obter_usuarios";
+        const usersEndpoint = "admin/obter_usuarios";
         api.get(usersEndpoint)
             .then((response) => {
                 setUsers(response.data);
@@ -27,7 +27,7 @@ const Users = () => {
 
     const deleteUser = (userId) => {
         setLoading(true);
-        api.postForm("excluir_usuario", {"id_usuario": userId})
+        api.postForm("excluir_usuario", { "id_usuario": userId })
             .then(response => {
                 if (response.status === 204)
                     loadUsers();
@@ -51,12 +51,12 @@ const Users = () => {
     }, []);
 
     return (
-        <>            
+        <>
             {users.length > 0 ?
-            <>
-                <ModalConfirm modalId="modalDeleteUser" question="Deseja realmente excluir este usuário?" confirmAction={() => deleteUser(selectedUserId)}/>
-                <TableUsers items={users} handleDeleteUser={handleDeleteUser} />
-            </>:
+                <>
+                    <ModalConfirm modalId="modalDeleteUser" question="Deseja realmente excluir este usuário?" confirmAction={() => deleteUser(selectedUserId)} />
+                    <TableUsers items={users} handleDeleteUser={handleDeleteUser} />
+                </> :
                 (!loading && <NoUsers />)}
             {loading && <Loading />}
         </>
