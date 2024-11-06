@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import TableOrdersLine from "./TableOrdersLine";
 
 const TableOrders = ({ items, handleCancelOrder, handleEvolveOrder }) => {
@@ -16,7 +17,13 @@ const TableOrders = ({ items, handleCancelOrder, handleEvolveOrder }) => {
                 {items.map(o => <TableOrdersLine item={o} key={o.id} handleCancelOrder={handleCancelOrder} handleEvolveOrder={handleEvolveOrder} />)}
             </tbody>
         </table>
-    )
+    );
 }
+
+TableOrders.propTypes = {
+    items: PropTypes.array.isRequired,
+    handleCancelOrder: PropTypes.func.isRequired,
+    handleEvolveOrder: PropTypes.func.isRequired
+};
 
 export default TableOrders;

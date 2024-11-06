@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { NumberFormatter, CurrencyFormatter } from './formatters';
 
@@ -17,7 +18,12 @@ const TableProductsLine = ({ item, handleDeleteProduct }) => {
                 </Link>
             </td>
         </tr>
-    )
+    );
 }
+
+TableProductsLine.propTypes = {
+    item: PropTypes.object.isRequired,
+    handleDeleteProduct: PropTypes.func.isRequired
+};
 
 export default TableProductsLine;

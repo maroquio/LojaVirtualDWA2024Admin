@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { NumberFormatter } from './formatters';
 
 const TableUsersLine = ({ item, handleDeleteUser }) => {
@@ -15,5 +16,10 @@ const TableUsersLine = ({ item, handleDeleteUser }) => {
         </tr>
     );
 }
+
+TableUsersLine.propTypes = {
+    item: PropTypes.object.isRequired,
+    handleDeleteUser: PropTypes.func.isRequired
+};
 
 export default TableUsersLine;

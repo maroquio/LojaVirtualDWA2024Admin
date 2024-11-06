@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import TableUsersLine from './TableUsersLine'
 
 const TableUsers = ({ items, handleDeleteUser }) => {
@@ -18,5 +19,10 @@ const TableUsers = ({ items, handleDeleteUser }) => {
         </table>
     );
 }
+
+TableUsers.propTypes = {
+    items: PropTypes.array.isRequired,
+    handleDeleteUser: PropTypes.func.isRequired
+};
 
 export default TableUsers;

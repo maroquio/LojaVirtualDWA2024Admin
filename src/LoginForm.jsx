@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import FormInput from "./FormInput";
 
 const LoginForm = ({ handleChange, inputs, errors }) => {
@@ -14,5 +15,11 @@ const LoginForm = ({ handleChange, inputs, errors }) => {
         </>
     );
 }
+
+LoginForm.propTypes = {
+    handleChange: PropTypes.func.isRequired,
+    inputs: PropTypes.object.isRequired,
+    errors: PropTypes.object.isRequired
+};
 
 export default LoginForm;
