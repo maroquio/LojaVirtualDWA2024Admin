@@ -2,10 +2,10 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import api from "./axiosApi";
 import LoginForm from "./LoginForm";
-import FormButtons from './FormButtons';
 import Loading from './Loading';
 import handleChange from './handleChange';
 import parseErrors from './parseErrors';
+import { login } from './authService';
 
 const Home = () => {
     const [inputs, setInputs] = useState({});
@@ -16,21 +16,12 @@ const Home = () => {
     function handleSubmit(event) {
         event.preventDefault();
         setLoading(true);
-        api.post("/auth/entrar", inputs)
-            .then((response) => {                
-                if (response.status === 200) {
-                    navigate("/orders");
-                } else {
-                    console.log(response);
-                }
-            })
-            .catch((error) => {
-                if (error && error.response && error.response.data)
-                    setErrors(parseErrors(error.response.data));
-            })
-            .finally(() => {
-                setLoading(false);
-            });
+        if (login(inputs.email, inputs.senha)) {
+            navigate("/orders");
+        } else {
+            setErrors({ email: 'E-mail ou senha inválidos' });
+        }
+        setLoading(false);
     }
 
     function localHandleChange(event) {

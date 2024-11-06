@@ -1,14 +1,13 @@
 import api from "./axiosApi";
-import * as jwt from "jwt-decode"; // npm install jwt-decode
+import * as jwt from "jwt-decode";
 
 export const login = async (email, senha) => {
     let loggedIn = false;
-    await api
-        .postForm("auth/entrar", { "email": email, "senha": senha })
+    await api.post("auth/entrar", { "email": email, "senha": senha })
         .then((response) => {
             if (response.status === 200) {
                 if (response.data.token) {                    
-                    const jsonString = JSON.stringify(token);
+                    const jsonString = JSON.stringify(response.data.token);
                     localStorage.setItem("token", jsonString);
                     loggedIn = isAdmin();
                 }
