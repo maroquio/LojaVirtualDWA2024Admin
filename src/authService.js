@@ -39,6 +39,16 @@ export const isAdmin = () => {
     }
 };
 
+export const getUserData = () => {
+    const token = getToken();
+    if (token) {
+        const decoded = jwtDecode(token);
+        return decoded;
+    } else {
+        return null;
+    }
+};
+
 export const authHeader = () => {
     const token = getToken();
     if (token) {
