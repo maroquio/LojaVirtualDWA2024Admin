@@ -25,6 +25,7 @@ const HomeLogin = () => {
     function localHandleChange(event) {
         handleChange(event, inputs, setInputs);
     }
+
     return (
         <>
             <h1 className='mt-2'>Página Principal</h1>
@@ -40,7 +41,7 @@ const HomeLogin = () => {
             </form>
             {loading && <Loading />}
         </>
-    )
+    );
 }
 
-export default HomeLogin
+export default HomeLogin;
