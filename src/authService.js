@@ -7,9 +7,8 @@ export const login = async (email, senha) => {
     await api.post(loginEndpoint, { "email": email, "senha": senha })
         .then((response) => {
             if (response.status === 200) {
-                if (response.data.token) {                    
-                    const jsonString = JSON.stringify(response.data.token);
-                    localStorage.setItem("token", jsonString);
+                if (response.data.token) {
+                    localStorage.setItem("token", response.data.token);
                     loggedIn = isAdmin();
                 }
             } else {
@@ -27,7 +26,7 @@ export const logout = () => {
 };
 
 export const getToken = () => {
-    return JSON.parse(localStorage.getItem("token"));
+    return localStorage.getItem("token");
 };
 
 export const isAdmin = () => {
