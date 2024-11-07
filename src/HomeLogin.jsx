@@ -11,10 +11,10 @@ const HomeLogin = () => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
         setLoading(true);
-        if (login(inputs.email, inputs.senha)) {
+        if (await login(inputs.email, inputs.senha)) {
             navigate("/orders");
         } else {
             setErrors({ email: 'E-mail ou senha inválidos' });
@@ -28,9 +28,8 @@ const HomeLogin = () => {
 
     return (
         <>
-            <h1 className='mt-2'>Página Principal</h1>
+            <h1 className='mt-2'>Entrar</h1>
             <hr />
-            <h1>Entrar</h1>
             <form onSubmit={handleSubmit} noValidate autoComplete="off">
                 <LoginForm handleChange={localHandleChange} errors={errors} inputs={inputs} />
                 <div>
