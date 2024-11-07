@@ -48,12 +48,3 @@ export const getUserData = () => {
         return null;
     }
 };
-
-export const authHeader = () => {
-    const token = getToken();
-    if (token) {
-        return { "x-access-token": token };
-    } else {
-        return {};
-    }
-};
