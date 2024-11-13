@@ -1,45 +1,25 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import ProductForm from './ProductForm';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import api from "./axiosApi";
 import FormButtons from './FormButtons';
 import handleChange from './handleChange';
 import parseErrors from './parseErrors';
 import Loading from './Loading';
 
-const EditProduct = () => {
+const CreateProduct = () => {
     const [inputs, setInputs] = useState({});
     const [errors, setErrors] = useState({});
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-
-    const idProduto = useParams().id;
-    if (!idProduto) {
-        navigate("/products");
-    }
-
-    function loadProductById(id) {
-        setLoading(true);
-        const getProductEndpoint = `admin/obter_produto/${id}`;
-        api.get(getProductEndpoint)
-            .then(response => {
-                setInputs(response.data);
-            })
-            .catch(error => {
-                console.error('Erro ao carregar produto:', error);
-            })
-            .finally(() => {
-                setLoading(false);
-            });
-    }
-
+    
     async function handleSubmit(event) {
         event.preventDefault();
         setLoading(true);
-        const editProductEndpoint = "admin/alterar_produto";
-        await api.post(editProductEndpoint, inputs)
+        const insertProductEndpoint = "admin/inserir_produto";
+        await api.post(insertProductEndpoint, inputs)
             .then((response) => {
-                if (response.status === 204) {
+                if (response.status === 201) {
                     navigate("/products");
                 } else {
                     console.log(response);
@@ -58,18 +38,13 @@ const EditProduct = () => {
         handleChange(event, inputs, setInputs);
     }
 
-    useEffect(() => {
-        setInputs({ ...inputs, id: idProduto });
-        loadProductById(idProduto);
-    }, [idProduto]);
-
     return (
         <>
             <div className="d-flex justify-content-between align-items-center">
-                <h1>Alteração de Produto</h1>
+                <h1>Inclusão de Produto</h1>
             </div>
             <form onSubmit={handleSubmit} noValidate autoComplete='off' className='mb-3'>
-                <ProductForm handleChange={localHandleChange} inputs={inputs} errors={errors} isNew={false} />
+                <ProductForm handleChange={localHandleChange} inputs={inputs} errors={errors} />
                 <FormButtons cancelTarget="/products" />
             </form>
             {loading && <Loading />}
@@ -77,4 +52,4 @@ const EditProduct = () => {
     );
 }
 
-export default EditProduct;
+export default CreateProduct;

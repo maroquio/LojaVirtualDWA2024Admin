@@ -4,6 +4,7 @@ import TableProducts from "./TableProducts";
 import api from "./axiosApi";
 import Loading from "./Loading";
 import ModalConfirm from "./ModalConfirm";
+import { NavLink } from "react-router-dom";
 
 const Products = () => {
     const [products, setProducts] = useState([]);
@@ -55,6 +56,7 @@ const Products = () => {
             {products.length > 0 ?
                 <>
                     <ModalConfirm modalId="modalDeleteProduct" question="Deseja realmente excluir o produto?" confirmAction={() => deleteProduct(selectedProductId)} />
+                    <NavLink to="/products/create" className="btn btn-primary my-3">Novo Produto</NavLink>
                     <TableProducts items={products} handleDeleteProduct={handleDeleteProduct}/> 
                 </> :
                 (!loading && <NoProducts />)
