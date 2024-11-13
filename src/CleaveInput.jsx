@@ -8,9 +8,7 @@ const CleaveInput = ({ type, field, onChange, options, label, value, error }) =>
             <div className="form-floating">
                 <Cleave type={type} className={`form-control ${error ? "is-invalid" : "is-valid"}`} id={field} name={field} placeholder=" " onChange={onChange} options={options} value={value} />
                 <label htmlFor={field}>{label}</label>
-                {error && <div className="invalid-feedback">
-                    {error}
-                </div>}
+                {error && <div className="invalid-feedback" dangerouslySetInnerHTML={{__html: error}} />}
             </div>
         </>
     );
