@@ -11,13 +11,23 @@ const CreateProduct = () => {
     const [inputs, setInputs] = useState({});
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
+    const [file, setFile] = useState(null);
     const navigate = useNavigate();
-    
+
     async function handleSubmit(event) {
         event.preventDefault();
         setLoading(true);
         const insertProductEndpoint = "admin/inserir_produto";
-        await api.post(insertProductEndpoint, inputs)
+        const formData = new FormData();
+        Object.entries(inputs).forEach(([key, value]) => {
+            formData.append(key, value);
+        });
+        if (file) {
+            formData.append("imagem", file);
+        }
+        await api.postForm(insertProductEndpoint, formData, {
+            headers: { "Content-Type": "multipart/form-data" },
+        })
             .then((response) => {
                 if (response.status === 201) {
                     navigate("/products");
@@ -38,13 +48,17 @@ const CreateProduct = () => {
         handleChange(event, inputs, setInputs);
     }
 
+    function handleFileChange(event) {
+        setFile(event.target.files[0]);
+    }
+
     return (
         <>
             <div className="d-flex justify-content-between align-items-center">
                 <h1>Inclusão de Produto</h1>
             </div>
             <form onSubmit={handleSubmit} noValidate autoComplete='off' className='mb-3'>
-                <ProductForm handleChange={localHandleChange} inputs={inputs} errors={errors} />
+                <ProductForm handleChange={localHandleChange} inputs={inputs} errors={errors} handleFileChange={handleFileChange} />
                 <FormButtons cancelTarget="/products" />
             </form>
             {loading && <Loading />}

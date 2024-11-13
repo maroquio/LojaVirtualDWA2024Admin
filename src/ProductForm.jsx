@@ -3,7 +3,7 @@ import CleaveInput from "./CleaveInput"
 import FormInput from "./FormInput"
 import FormTextarea from "./FormTextarea"
 
-const ProductForm = ({ handleChange, inputs, errors }) => {
+const ProductForm = ({ handleChange, handleFileChange, inputs, errors }) => {
     return (
         <>
             <div className="row">
@@ -27,6 +27,18 @@ const ProductForm = ({ handleChange, inputs, errors }) => {
                             delimiter: '.',
                             numeralDecimalMark: ','
                         }} />
+                </div>
+                <div className="col-12 mb-3">
+                    <label htmlFor="imagem" className="form-label">Foto do Produto</label>
+                    <input
+                        type="file"
+                        id="imagem"
+                        name="imagem"
+                        className={`form-control ${errors?.imagem ? 'is-invalid' : ''}`}
+                        onChange={handleFileChange}
+                        accept="image/*"
+                    />
+                    {errors?.imagem && <div className="invalid-feedback">{errors.imagem}</div>}
                 </div>
             </div>
         </>
