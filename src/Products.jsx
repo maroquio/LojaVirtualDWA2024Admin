@@ -53,11 +53,11 @@ const Products = () => {
 
     return (
         <>
+            <NavLink to="/products/create" className="btn btn-primary my-3">Novo Produto</NavLink>
             {products.length > 0 ?
                 <>
                     <ModalConfirm modalId="modalDeleteProduct" question="Deseja realmente excluir o produto?" confirmAction={() => deleteProduct(selectedProductId)} />
-                    <NavLink to="/products/create" className="btn btn-primary my-3">Novo Produto</NavLink>
-                    <TableProducts items={products} handleDeleteProduct={handleDeleteProduct}/> 
+                    <TableProducts items={products} handleDeleteProduct={handleDeleteProduct} /> 
                 </> :
                 (!loading && <NoProducts />)
             }
