@@ -27,7 +27,7 @@ const Products = () => {
 
     const deleteProduct = (productId) => {
         setLoading(true);
-        api.postForm("excluir_produto", {"id_produto": productId})
+        api.postForm("admin/excluir_produto", {"id_produto": productId})
             .then(response => {
                 if (response.status === 204)
                     loadProducts();
